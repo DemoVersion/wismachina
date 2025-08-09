@@ -107,6 +107,12 @@
     (function () {
       const canvas = document.getElementById('bg');
       const ctx = canvas.getContext('2d');
+
+      // --- tunables ---
+      const LINK_MAX_DIST = 140;      // px: how close dots must be to link
+      const LINK_MAX_OPACITY = 0.22;  // peak line opacity when overlapping
+      const LINK_MAX_PER_NODE = 4;    // limit connections per dot for perf/clarity
+
       let particles = [];
       let scrollY = 0;
       let pointer = { x: 0.5, y: 0.5 };
@@ -141,7 +147,10 @@
       function draw(t) {
         const w = window.innerWidth;
         const h = window.innerHeight;
+
         ctx.clearRect(0, 0, w, h);
+
+        // Background gradient
         const grad = ctx.createRadialGradient(
           w * pointer.x, h * pointer.y, Math.max(w, h) * 0.05,
           w / 2, h / 2, Math.max(w, h) * 0.9
@@ -150,28 +159,76 @@
         grad.addColorStop(1, "rgba(6,8,12,0.9)");
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
+
         const scrollEnergy = (scrollY % h) / h;
         const px = pointer.x - 0.5;
         const py = pointer.y - 0.5;
-        particles.forEach((p, i) => {
+
+        // 1) Update positions
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
           p.a += p.v * 0.005 + scrollEnergy * 0.02 + px * 0.01;
           p.x += Math.cos(p.a) * p.v * 0.6 + px * 0.3;
           p.y += Math.sin(p.a) * p.v * 0.6 + py * 0.3 + scrollEnergy * 0.8;
+
+          // wrap
           if (p.x < -5) p.x = w + 5;
           if (p.x > w + 5) p.x = -5;
           if (p.y < -5) p.y = h + 5;
           if (p.y > h + 5) p.y = -5;
+        }
+
+        // 2) Draw proximity links (fades in/out by distance)
+        const max2 = LINK_MAX_DIST * LINK_MAX_DIST;
+        for (let i = 0; i < particles.length; i++) {
+          let links = 0;
+          const a = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy;
+            if (d2 <= max2) {
+              // fade by distance (closer == brighter)
+              const d = Math.sqrt(d2);
+              const alpha = Math.max(0, (1 - d / LINK_MAX_DIST)) * LINK_MAX_OPACITY;
+
+              // subtle “twinkle” so links breathe
+              const tw = 0.5 + 0.5 * Math.sin((t + (i + j) * 53) / 1400);
+              const a2 = alpha * (0.75 + 0.25 * tw);
+
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.lineWidth = 1 + a2 * 1.5; // slightly thicker as they get closer
+              ctx.strokeStyle = `rgba(120,190,255,${a2})`;
+              ctx.stroke();
+
+              links++;
+              if (links >= LINK_MAX_PER_NODE) break;
+            }
+          }
+        }
+
+        // 3) Draw particles (glow + core)
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
           const twinkle = 0.5 + 0.5 * Math.sin((t + i * 77) / p.tw);
           const opacity = p.o * twinkle;
+
+          // glow
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * (1.5 + twinkle * 0.8), 0, Math.PI * 2);
           ctx.fillStyle = `rgba(105,180,255,${opacity * 0.25})`;
           ctx.fill();
+
+          // core
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(180,220,255,${Math.min(1, opacity + 0.1)})`;
           ctx.fill();
-        });
+        }
+
         requestAnimationFrame(draw);
       }
 
