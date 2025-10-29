@@ -197,12 +197,66 @@
 
   <section id="join" class="py-16 md:py-24 border-t border-white/10">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="rounded-3xl border border-white/10 p-8 md:p-12 text-center bg-white/5">
-        <h2 class="text-2xl md:text-3xl font-semibold">Join WisMachina</h2>
-        <p class="mt-3 text-slate-300/90 max-w-2xl mx-auto">Ready to share, learn, and build together? Join the conversation, explore our repos, or become a mentor.</p>
-        <div class="mt-6 flex flex-wrap justify-center gap-3">
-          <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-xl bg-accent-500 hover:bg-accent-400 px-5 py-3 font-medium text-white shadow-soft transition">GitHub Repos</a>
-          <a href="#" class="inline-flex items-center rounded-xl border border-white/10 hover:bg-white/10 px-5 py-3 font-medium transition">Become a Mentor</a>
+      <div class="rounded-3xl border border-white/10 p-8 md:p-12 bg-white/5">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-semibold">Join WisMachina</h2>
+          <p class="mt-3 text-slate-300/90 max-w-2xl mx-auto">Ready to share, learn, and build together? Fill out the form below to get started.</p>
+        </div>
+
+        <form class="max-w-2xl mx-auto space-y-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-300 mb-2">
+              Name <span class="text-red-400">*</span>
+            </label>
+            <input type="text" id="name" name="name" required class="w-full rounded-lg border border-white/10 bg-ink-800/50 px-4 py-2.5 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition" placeholder="Your name" />
+          </div>
+
+          <div>
+            <label for="interest" class="block text-sm font-medium text-slate-300 mb-2">
+              What brings you here? <span class="text-red-400">*</span>
+            </label>
+            <select id="interest" name="interest" required class="w-full rounded-lg border border-white/10 bg-ink-800/50 px-4 py-2.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition">
+              <option value="">Select one…</option>
+              <option>Learn about LLM fine-tuning</option>
+              <option>Seeking mentorship</option>
+              <option>Want to become a mentor</option>
+              <option>Collaboration on a project</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="project" class="block text-sm font-medium text-slate-300 mb-2">
+              Tell us about your project or goals <span class="text-red-400">*</span>
+            </label>
+            <textarea id="project" name="project" rows="4" required class="w-full rounded-lg border border-white/10 bg-ink-800/50 px-4 py-2.5 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition resize-none" placeholder="What would you like to work on or learn?"></textarea>
+          </div>
+
+          <div>
+            <label for="experience" class="block text-sm font-medium text-slate-300 mb-2">
+              Experience level
+            </label>
+            <select id="experience" name="experience" class="w-full rounded-lg border border-white/10 bg-ink-800/50 px-4 py-2.5 text-slate-200 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition">
+              <option value="">Select level…</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+
+          <div class="pt-2 text-center">
+            <button type="button" onclick="redirectToGoogleForm()" class="inline-flex items-center justify-center rounded-xl bg-accent-500 hover:bg-accent-400 px-6 py-3 font-medium text-white shadow-soft transition">
+              Submit
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-white/10 text-center">
+          <p class="text-sm text-slate-400 mb-3">Or explore our community</p>
+          <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 text-sm rounded-lg border border-white/10 hover:bg-white/5 px-4 py-2 transition">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.57 0-.28-.01-1.02-.02-2-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.35-1.77-1.35-1.77-1.1-.76.08-.74.08-.74 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.83 1.32 3.52 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.46-1.33-5.46-5.91 0-1.31.47-2.39 1.24-3.23-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.92 1.24 3.23 0 4.59-2.8 5.6-5.47 5.9.43.38.81 1.12.81 2.26 0 1.64-.02 2.96-.02 3.36 0 .31.22.69.83.57A12 12 0 0 0 12 .5Z"/></svg>
+            <span>View GitHub</span>
+          </a>
         </div>
       </div>
     </div>
@@ -219,6 +273,25 @@
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    function redirectToGoogleForm() {
+      const base = 'https://docs.google.com/forms/d/e/1FAIpQLSeVOdPkT4mpm9YIdfZcBPY8iIwx0FzO3Hr_L6aajCystXjekA/viewform';
+      const name = document.getElementById('name').value;
+      const interest = document.getElementById('interest').value;
+      const project = document.getElementById('project').value;
+      const experience = document.getElementById('experience').value || 'Not specified';
+
+      const fullDesc = `Experience: ${experience}\n\n${project}`;
+
+      const params = new URLSearchParams({
+        'entry.775826931': name,
+        'entry.50852829': interest,
+        'entry.1522972528': fullDesc,
+        'entry.918395979': experience
+      });
+
+      window.location.href = `${base}?${params.toString()}`;
+    }
   </script>
 </body>
 </html>
