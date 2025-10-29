@@ -1,313 +1,224 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WisMachina — Where Wisdom Meets the Machine</title>
+  <meta name="description" content="WisMachina is an open-source community for language model fine-tuning, built on mentorship and collaborative craft." />
   <link rel="icon" type="image/png" href="favicon.png">
   <meta property="og:title" content="WisMachina" />
-  <meta property="og:description" content="WisMachina - Where Wisdom meets Machine" />
-  <meta property="og:url" content="https://WisMachina.com" />
+  <meta property="og:description" content="WisMachina — Where Wisdom Meets the Machine" />
+  <meta property="og:url" content="https://wismachina.com" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://WisMachina.com/assets/wismachina.png" />
+  <meta property="og:image" content="https://wismachina.com/assets/wismachina.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="WisMachina" />
-  <meta name="twitter:description" content="WisMachina - Where Wisdom meets Machine" />
-  <meta name="twitter:image" content="https://WisMachina.com/assets/wismachina.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WisMachina - Where Wisdom meets Machine</title>
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 200vh;
-      background: #0a0d14;
-      color: white;
-      font-family: system-ui, sans-serif;
-      overflow-x: hidden;
-    }
+  <meta name="twitter:description" content="WisMachina — Where Wisdom Meets the Machine" />
+  <meta name="twitter:image" content="https://wismachina.com/assets/wismachina.png" />
 
-    canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .center {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    h1 {
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      font-size: clamp(40px, 9vw, 140px);
-      text-shadow: 0 6px 28px rgba(60, 140, 255, 0.45), 0 1px 0 rgba(255, 255, 255, 0.06);
-      margin: 0;
-      display: flex;
-      gap: 0.25em;
-    }
-
-    .word {
-      position: relative;
-      display: inline-block;
-    }
-
-    .machina-text {
-      background: linear-gradient(180deg,
-          #6dc3ff 0%,
-          /* light blue top */
-          #3b88c3 50%,
-          /* medium blue mid */
-          #1f3d5c 100%
-          /* dark blue bottom */
-        );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .wis-text {
-      background: linear-gradient(180deg,
-          #ffffff 0%,
-          /* bright white top */
-          #f5f5f5 50%,
-          /* soft white mid */
-          #eaeaea 100%
-          /* slightly darker base for depth */
-        );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-
-    .underline {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 40%;
-      margin-top: 0;
-    }
-
-    .bracket-label {
-      margin-top: 0.2rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(186, 225, 255, 0.8);
-      white-space: nowrap;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5em;
-        /* space between Wis and Machina rows */
-      }
-
-      .word {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .underline {
-        position: static;
-        /* no overlapping in mobile */
-        transform: none;
-        margin-top: 0.25em;
-      }
-
-      .bracket-label {
-        font-size: 0.7rem;
-        /* slightly smaller for mobile */
-        text-align: center;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <canvas id="bg"></canvas>
-
-  <div class="center">
-    <h1>
-      <span class="word">
-        <span class="wis-text">Wis</span>
-        <span class="underline">
-          <svg width="100" height="20" viewBox="0 0 100 20">
-            <path d="M2,2 L2,14 L98,14 L98,2" fill="none" stroke="rgba(140,190,255,0.9)" stroke-width="2.5"
-              stroke-linecap="round" />
-          </svg>
-          <div class="bracket-label">Wis — from Wisdom</div>
-        </span>
-      </span>
-      <span class="word machina">
-        <span class="machina-text">Machina</span>
-        <span class="underline">
-          <svg width="130" height="20" viewBox="0 0 130 20">
-            <path d="M2,2 L2,14 L128,14 L128,2" fill="none" stroke="rgba(140,190,255,0.9)" stroke-width="2.5"
-              stroke-linecap="round" />
-          </svg>
-          <div class="bracket-label">Machina — from Machine</div>
-        </span>
-      </span>
-    </h1>
-  </div>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    (function () {
-      const canvas = document.getElementById('bg');
-      const ctx = canvas.getContext('2d');
-
-      // --- tunables ---
-      const LINK_MAX_DIST = 140;      // px: how close dots must be to link
-      const LINK_MAX_OPACITY = 0.22;  // peak line opacity when overlapping
-      const LINK_MAX_PER_NODE = 4;    // limit connections per dot for perf/clarity
-
-      let particles = [];
-      let scrollY = 0;
-      let pointer = { x: 0.5, y: 0.5 };
-      let dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-      function seedParticle(w, h) {
-        const baseSpeed = 0.05 + Math.random() * 0.15;
-        return {
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: 0.6 + Math.random() * 1.8,
-          a: Math.random() * Math.PI * 2,
-          v: baseSpeed,
-          o: 0.15 + Math.random() * 0.6,
-          tw: 1000 + Math.random() * 3000
-        };
-      }
-
-      function resize() {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.floor(w * dpr);
-        canvas.height = Math.floor(h * dpr);
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.floor((w * h) / 9000);
-        particles = new Array(count).fill(0).map(() => seedParticle(w, h));
-      }
-
-      function draw(t) {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-
-        ctx.clearRect(0, 0, w, h);
-
-        // Background gradient
-        const grad = ctx.createRadialGradient(
-          w * pointer.x, h * pointer.y, Math.max(w, h) * 0.05,
-          w / 2, h / 2, Math.max(w, h) * 0.9
-        );
-        grad.addColorStop(0, "rgba(20,22,30,0.35)");
-        grad.addColorStop(1, "rgba(6,8,12,0.9)");
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-
-        const scrollEnergy = (scrollY % h) / h;
-        const px = pointer.x - 0.5;
-        const py = pointer.y - 0.5;
-
-        // 1) Update positions
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.a += p.v * 0.005 + scrollEnergy * 0.02 + px * 0.01;
-          p.x += Math.cos(p.a) * p.v * 0.6 + px * 0.3;
-          p.y += Math.sin(p.a) * p.v * 0.6 + py * 0.3 + scrollEnergy * 0.8;
-
-          // wrap
-          if (p.x < -5) p.x = w + 5;
-          if (p.x > w + 5) p.x = -5;
-          if (p.y < -5) p.y = h + 5;
-          if (p.y > h + 5) p.y = -5;
-        }
-
-        // 2) Draw proximity links (fades in/out by distance)
-        const max2 = LINK_MAX_DIST * LINK_MAX_DIST;
-        for (let i = 0; i < particles.length; i++) {
-          let links = 0;
-          const a = particles[i];
-          for (let j = i + 1; j < particles.length; j++) {
-            const b = particles[j];
-            const dx = a.x - b.x;
-            const dy = a.y - b.y;
-            const d2 = dx * dx + dy * dy;
-            if (d2 <= max2) {
-              // fade by distance (closer == brighter)
-              const d = Math.sqrt(d2);
-              const alpha = Math.max(0, (1 - d / LINK_MAX_DIST)) * LINK_MAX_OPACITY;
-
-              // subtle “twinkle” so links breathe
-              const tw = 0.5 + 0.5 * Math.sin((t + (i + j) * 53) / 1400);
-              const a2 = alpha * (0.75 + 0.25 * tw);
-
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.lineWidth = 1 + a2 * 1.5; // slightly thicker as they get closer
-              ctx.strokeStyle = `rgba(120,190,255,${a2})`;
-              ctx.stroke();
-
-              links++;
-              if (links >= LINK_MAX_PER_NODE) break;
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: {
+            ink: {
+              900: '#0B1020',
+              800: '#10172A',
+              700: '#1F2937'
+            },
+            accent: {
+              500: '#4F46E5',
+              400: '#6366F1',
+              300: '#A78BFA'
             }
+          },
+          boxShadow: {
+            soft: '0 8px 30px rgba(0,0,0,0.08)'
           }
         }
-
-        // 3) Draw particles (glow + core)
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          const twinkle = 0.5 + 0.5 * Math.sin((t + i * 77) / p.tw);
-          const opacity = p.o * twinkle;
-
-          // glow
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r * (1.5 + twinkle * 0.8), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(105,180,255,${opacity * 0.25})`;
-          ctx.fill();
-
-          // core
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(180,220,255,${Math.min(1, opacity + 0.1)})`;
-          ctx.fill();
-        }
-
-        requestAnimationFrame(draw);
       }
-
-      window.addEventListener('resize', resize);
-      window.addEventListener('scroll', () => { scrollY = window.scrollY || 0; });
-      window.addEventListener('pointermove', e => {
-        const rect = canvas.getBoundingClientRect();
-        pointer.x = (e.clientX - rect.left) / rect.width;
-        pointer.y = (e.clientY - rect.top) / rect.height;
-      });
-
-      resize();
-      requestAnimationFrame(draw);
-    })();
+    }
   </script>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-ink-900 text-slate-200 font-sans selection:bg-accent-500/30">
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-ink-900/60">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <a href="#home" class="flex items-center gap-2 group">
+          <span class="font-semibold tracking-tight text-lg">WisMachina</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+          <a href="#about" class="hover:text-white">About</a>
+          <a href="#mentorship" class="hover:text-white">Mentorship</a>
+          <a href="#work" class="hover:text-white">Recent Work</a>
+          <a href="#join" class="hover:text-white">Join</a>
+          <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-lg bg-white/5 hover:bg-white/10 px-3 py-1.5 transition">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.57 0-.28-.01-1.02-.02-2-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.35-1.77-1.35-1.77-1.1-.76.08-.74.08-.74 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.83 1.32 3.52 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.46-1.33-5.46-5.91 0-1.31.47-2.39 1.24-3.23-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.92 1.24 3.23 0 4.59-2.8 5.6-5.47 5.9.43.38.81 1.12.81 2.26 0 1.64-.02 2.96-.02 3.36 0 .31.22.69.83.57A12 12 0 0 0 12 .5Z"/></svg>
+            <span>GitHub</span>
+          </a>
+        </nav>
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-white/10" aria-label="Open menu">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="#about" class="py-2">About</a>
+        <a href="#mentorship" class="py-2">Mentorship</a>
+        <a href="#work" class="py-2">Recent Work</a>
+        <a href="#join" class="py-2">Join</a>
+        <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="py-2">GitHub</a>
+      </div>
+    </div>
+  </header>
 
+  <section id="home" class="relative overflow-hidden">
+    <div class="noise absolute inset-0 pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-4 pt-20 md:pt-28 pb-16 md:pb-24">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-6xl font-semibold leading-tight tracking-tight">
+            Wisdom in the <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-accent-300">Machine</span>
+          </h1>
+          <p class="mt-5 text-slate-300/90 max-w-prose">
+            <span class="font-medium">WisMachina</span> is an open-source collective for language model fine-tuning, built on mentorship, curiosity, and shared growth.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#join" class="inline-flex items-center justify-center rounded-xl bg-accent-500 hover:bg-accent-400 px-5 py-3 font-medium text-white shadow-soft transition">Join the Community</a>
+            <a href="#work" class="inline-flex items-center justify-center rounded-xl border border-white/10 hover:bg-white/5 px-5 py-3 font-medium transition">See Recent Work</a>
+          </div>
+          <div class="mt-6 text-xs uppercase tracking-wider text-slate-400">Open source • Mentorship • LLM fine‑tuning</div>
+        </div>
+        <div class="relative flex items-center justify-center">
+          <img src="assets/logo.png" alt="WisMachina" class="w-full max-w-lg">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-5 gap-10 items-start">
+        <div class="md:col-span-2">
+          <h2 class="text-2xl md:text-3xl font-semibold">What We Are</h2>
+          <p class="mt-4 text-slate-300/90">
+            We are researchers, engineers, and tinkerers exploring how humans and machines can learn together.
+            WisMachina helps individual contributors build mastery in fine‑tuning through guided mentorship,
+            collaborative projects, and transparent knowledge sharing.
+          </p>
+        </div>
+        <div class="md:col-span-3 grid sm:grid-cols-3 gap-4">
+          <div class="rounded-xl border border-white/10 p-4">
+            <div class="text-xl">🧭</div>
+            <div class="mt-2 font-medium">Guidance, not gatekeeping</div>
+            <p class="text-sm text-slate-400 mt-1">Clear pathways to grow craft with supportive mentors.</p>
+          </div>
+          <div class="rounded-xl border border-white/10 p-4">
+            <div class="text-xl">🤝</div>
+            <div class="mt-2 font-medium">Collaboration over competition</div>
+            <p class="text-sm text-slate-400 mt-1">We build together and celebrate shared wins.</p>
+          </div>
+          <div class="rounded-xl border border-white/10 p-4">
+            <div class="text-xl">🧠</div>
+            <div class="mt-2 font-medium">Open learning for all</div>
+            <p class="text-sm text-slate-400 mt-1">Everything we learn gets documented and shared.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mentorship" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-semibold">Learn With Peers</h2>
+        <p class="mt-4 text-slate-300/90">If you have a project or idea you want to work on, we'll help you along the way to build it.</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-white/10 p-6 hover:bg-white/5 transition">
+          <div class="text-sm uppercase tracking-wider text-slate-400">Collaborative Learning</div>
+          <p class="mt-3">Work on your own projects with guidance and support from the community.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 p-6 hover:bg-white/5 transition">
+          <div class="text-sm uppercase tracking-wider text-slate-400">Hands-on Experience</div>
+          <p class="mt-3">Learn by doing. Build real projects with feedback from experienced practitioners.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 p-6 hover:bg-white/5 transition">
+          <div class="text-sm uppercase tracking-wider text-slate-400">Open Community</div>
+          <p class="mt-3">Share knowledge, ask questions, and grow together as we explore LLM fine-tuning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-end justify-between gap-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-semibold">Built Together</h2>
+          <p class="mt-3 text-slate-300/90">A small window into recent community projects.</p>
+        </div>
+        <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="hidden sm:inline-flex items-center gap-2 text-sm rounded-xl border border-white/10 px-3 py-2 hover:bg-white/5">
+          <span>View all on GitHub</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-4">
+        <a href="https://github.com/WisMachina/cf-llm-finetune" target="_blank" rel="noreferrer" class="group rounded-2xl border border-white/10 overflow-hidden hover:border-white/20 transition">
+          <div class="aspect-[16/9] bg-gradient-to-br from-ink-800 to-ink-700 flex items-center justify-center">
+            <svg class="w-16 h-16 text-accent-400 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+          </div>
+          <div class="p-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-medium">cf-llm-finetune</h3>
+              <span class="text-xs text-slate-400">Python</span>
+            </div>
+            <p class="mt-1 text-sm text-slate-400">Fine-tuning LLMs for Code Generation</p>
+          </div>
+        </a>
+      </div>
+
+      <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="sm:hidden inline-flex items-center gap-2 mt-6 text-sm rounded-xl border border-white/10 px-3 py-2 hover:bg-white/5">
+        <span>View all on GitHub</span>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="join" class="py-16 md:py-24 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="rounded-3xl border border-white/10 p-8 md:p-12 text-center bg-white/5">
+        <h2 class="text-2xl md:text-3xl font-semibold">Join WisMachina</h2>
+        <p class="mt-3 text-slate-300/90 max-w-2xl mx-auto">Ready to share, learn, and build together? Join the conversation, explore our repos, or become a mentor.</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <a href="https://github.com/WisMachina" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-xl bg-accent-500 hover:bg-accent-400 px-5 py-3 font-medium text-white shadow-soft transition">GitHub Repos</a>
+          <a href="#" class="inline-flex items-center rounded-xl border border-white/10 hover:bg-white/10 px-5 py-3 font-medium transition">Become a Mentor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+      <p>© 2025 WisMachina · Open Source Collective</p>
+      <p>Built with 💡 by our community of contributors.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  </script>
 </body>
-
 </html>
